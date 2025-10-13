@@ -5,6 +5,8 @@ import it.unibo.inheritance.api.BankAccount;
 
 abstract class AbstractBankAccount implements BankAccount{
     protected static final double ATM_TRANSACTION_FEE = 1;
+    protected static final double MANAGEMENT_FEE = 5;
+
 
     private final AccountHolder holder;
     private double balance;
@@ -33,6 +35,7 @@ abstract class AbstractBankAccount implements BankAccount{
 
     public void chargeManagementFees(int id){
         setBalance(getBalance() - computeFee());
+        resetTransactions();
     }
 
     public void deposit(int id, double amount){
@@ -44,11 +47,13 @@ abstract class AbstractBankAccount implements BankAccount{
     }
 
     public void withdraw(int id, double amount){
-        transactionOp(id, -amount);
+        if(isWithDrawAllowed(amount)){
+            transactionOp(id, -amount);
+        }
     }
 
     public void withdrawFromATM(int id, double amount){
-        transactionOp(id, -amount - ATM_TRANSACTION_FEE);
+        withdraw(id, amount + ATM_TRANSACTION_FEE);
     }
 
     protected abstract boolean isWithDrawAllowed(double amount);

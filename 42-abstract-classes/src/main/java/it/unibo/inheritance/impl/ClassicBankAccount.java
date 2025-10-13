@@ -12,6 +12,6 @@ public class ClassicBankAccount extends AbstractBankAccount {
     }
 
     protected  double computeFee(){
-        return 0;
+        return MANAGEMENT_FEE;
     }
 }

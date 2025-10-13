@@ -3,7 +3,6 @@ package it.unibo.inheritance.impl;
 import it.unibo.inheritance.api.AccountHolder;
 
 public class RestrictedBankAccount extends AbstractBankAccount {
-    protected static final double MANAGEMENT_FEE = 5;
     protected static final double TRANSACTION_FEE = 0.1;
 
 
@@ -12,7 +11,7 @@ public class RestrictedBankAccount extends AbstractBankAccount {
     }
 
     protected boolean isWithDrawAllowed(double amount){
-        return ((super.getBalance() - amount) > 0);
+        return super.getBalance() >= amount;
     }
 
     protected  double computeFee(){
