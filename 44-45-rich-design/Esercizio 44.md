@@ -101,3 +101,6 @@ Similarly, `dropDown()` returns `false` if the robot's arms are empty.
 If the robot is transporting objects, its battery consumption is higher.
 
 Use `TestRobotWithArms` to verify that the classes realized work correctly before calling the teacher for a correction.
+
+
+#comentario test
