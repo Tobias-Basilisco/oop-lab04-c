@@ -3,16 +3,20 @@ package it.unibo.design.robot.impl;
 import it.unibo.design.robot.api.RobotWithArms;
 
 public class RobotWithTwoArms extends BaseRobot implements RobotWithArms {
-    private boolean tooBusy;
     private BasicArm arm1;
     private BasicArm arm2;
     private int carriedItemsCount;
 
-
-    RobotWithTwoArms(final String robotName, final double liftConsumption, double dropConsumption){
+    public RobotWithTwoArms(final String robotName){
         super(robotName);
         arm1 = new BasicArm("left");
         arm2 = new BasicArm("right");
+    }
+
+    public RobotWithTwoArms(final String robotName, final double liftConsumption, double dropConsumption){
+        super(robotName);
+        arm1 = new BasicArm("left", liftConsumption, dropConsumption);
+        arm2 = new BasicArm("right", liftConsumption, dropConsumption);
     }
 
     /**
