@@ -14,7 +14,7 @@ public interface RobotWithArms extends Robot {
      * 
      * @return true if the action is successful
      */
-    boolean DropDown();
+    boolean dropDown();
 
     /**
      * 

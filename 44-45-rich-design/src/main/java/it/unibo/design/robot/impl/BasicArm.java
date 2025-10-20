@@ -4,8 +4,19 @@ public class BasicArm {
     private double liftConsumption;
     private double dropConsumption;
     private boolean busy;
+    private String name;
 
-    public BasicArm(final double liftConsumption, final double dropConsumption){
+    private static final double DEFAULT_LIFT_CONSUMPTION = 0.2;
+    private static final double DEFAULT_DROP_CONSUMPTION = 0.1;
+
+    public BasicArm(final String name){
+        this.name = name;
+        this.liftConsumption = DEFAULT_LIFT_CONSUMPTION;
+        this.dropConsumption = DEFAULT_DROP_CONSUMPTION;
+    }
+    
+    public BasicArm(final String name, final double liftConsumption, final double dropConsumption){
+        this.name = name;
         this.liftConsumption = liftConsumption;
         this.dropConsumption = dropConsumption;
     }
