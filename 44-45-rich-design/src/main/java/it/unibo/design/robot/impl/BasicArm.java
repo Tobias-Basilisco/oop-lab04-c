@@ -62,4 +62,8 @@ public class BasicArm {
     public double getDropConsumption(){
         return this.dropConsumption;
     }
+
+    public String getName(){
+        return this.name;
+    }
 }

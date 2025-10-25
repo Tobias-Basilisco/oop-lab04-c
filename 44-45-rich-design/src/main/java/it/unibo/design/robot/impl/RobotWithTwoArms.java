@@ -3,6 +3,7 @@ package it.unibo.design.robot.impl;
 import it.unibo.design.robot.api.RobotWithArms;
 
 public class RobotWithTwoArms extends BaseRobot implements RobotWithArms {
+    private static final double DELTA_CONSUMPTION_WITH_OBJECT = 0.1;
     private BasicArm arm1;
     private BasicArm arm2;
     private int carriedItemsCount;
@@ -65,12 +66,18 @@ public class RobotWithTwoArms extends BaseRobot implements RobotWithArms {
         return arm1.isBusy() && arm2.isBusy();
     }
 
+    private boolean isFree(){
+        return !arm1.isBusy() && !arm2.isBusy();
+    }
+
     private boolean doLift(BasicArm arm){
         if (!isBatteryEnough(arm.getLiftConsumption())){
             log("can not lift this, i'm starving (no battery)");
             return false;
         }
+        consumeBattery(arm.getLiftConsumption());
         carriedItemsCount ++;
+
         return arm.lift();
     }
 
@@ -79,7 +86,22 @@ public class RobotWithTwoArms extends BaseRobot implements RobotWithArms {
             log("can not drop this, i'm starving (no battery)");
             return false;
         }
+        consumeBattery(arm.getDropConsumption());
         carriedItemsCount --;
         return arm.drop();
+    }
+
+    /**
+     * @override
+     */
+    protected double getBatteryRequirementForMovement(){
+        double batteryRequirementForMovement = super.getBatteryRequirementForMovement();
+        if (arm1.isBusy()){
+            batteryRequirementForMovement += DELTA_CONSUMPTION_WITH_OBJECT;
+        }
+        if (arm2.isBusy()){
+            batteryRequirementForMovement += DELTA_CONSUMPTION_WITH_OBJECT;
+        }
+        return batteryRequirementForMovement;
     }
 }
