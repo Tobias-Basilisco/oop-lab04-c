@@ -40,7 +40,7 @@ public class BasicArm {
      * @return true if the action is successful
      */
     public boolean drop(){
-        if(isBusy()){
+        if(!isBusy()){
             return false;
         }
         setBusy(false);
